@@ -6,18 +6,18 @@ davicoelho.com.br
 
 🛠️ Tecnologias
 
-Next.js — Framework React com renderização estática
+• Next.js — Framework React com renderização estática
 
-TypeScript — Tipagem estática
+• TypeScript — Tipagem estática
 
-Rough.js — Geração de elementos SVG com estilo "hand-drawn"
+• Rough.js — Geração de elementos SVG com estilo "hand-drawn"
 
 ✏️ Funcionalidades
 
-Seções: Home, Sobre Mim, Experiências, Projetos e Contato
+• Seções: Home, Sobre Mim, Experiências, Projetos e Contato
 
-Elementos decorativos desenhados com Rough.js
+• Elementos decorativos desenhados com Rough.js
 
-Canvas interativo para o visitante desenhar na página
+• Canvas interativo para o visitante desenhar na página
 
-Design responsivo
+• Design responsivo
