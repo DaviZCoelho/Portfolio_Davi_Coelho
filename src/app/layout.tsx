@@ -23,6 +23,9 @@ const shadowsIntoLight = Shadows_Into_Light({
 export const metadata: Metadata = {
   title: "Davi - Desenvolvedor Full Stack",
   description: "Portfólio de Davi - Desenvolvedor Full Stack",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
