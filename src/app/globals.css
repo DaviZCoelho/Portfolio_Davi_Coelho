@@ -918,12 +918,15 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 }
 
 /* Circled words - hand-drawn circle around */
-.about-circled {
+.about-red-underlined {
   position: relative;
-  display: inline;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
   font-weight: 600;
   color: #2d2d2d;
   white-space: nowrap;
+  vertical-align: baseline;
 }
 
 /* Highlighted - highlighter marker effect */
@@ -1221,10 +1224,12 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 .contact-section {
   width: 100%;
   max-width: 900px;
-  padding: 4rem 2rem 3rem;
+  min-height: 85vh;
+  padding: 8rem 2rem 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   scroll-margin-top: 90px;
 }
 

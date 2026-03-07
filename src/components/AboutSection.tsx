@@ -119,7 +119,7 @@ function SketchUnderlineAbout() {
   return <svg ref={svgRef} width={180} height={8} viewBox="0 0 180 8" className="about-title-underline" />;
 }
 
-function SketchCircle({ className }: { className?: string }) {
+function SketchRedUnderline({ width = 120 }: { width?: number }) {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
@@ -127,24 +127,17 @@ function SketchCircle({ className }: { className?: string }) {
     svgRef.current.innerHTML = '';
     const rc = rough.svg(svgRef.current);
     svgRef.current.appendChild(
-      rc.ellipse(50, 16, 96, 30, { stroke: 'rgba(220, 80, 80, 0.5)', strokeWidth: 2, roughness: 2.5, bowing: 1.5, fill: 'none' })
+      rc.line(0, 4, width, 4, { stroke: 'rgba(220, 80, 80, 0.6)', strokeWidth: 2.5, roughness: 2, bowing: 1.5 })
     );
-  }, []);
+  }, [width]);
 
   return (
     <svg
       ref={svgRef}
-      className={className}
-      viewBox="0 0 100 32"
-      preserveAspectRatio="none"
-      style={{
-        position: 'absolute',
-        top: '-4px',
-        left: '-8px',
-        width: 'calc(100% + 16px)',
-        height: 'calc(100% + 8px)',
-        pointerEvents: 'none',
-      }}
+      width={width}
+      height={8}
+      viewBox={`0 0 ${width} 8`}
+      style={{ display: 'block', marginTop: '-10px', pointerEvents: 'none' }}
     />
   );
 }
@@ -194,9 +187,9 @@ export default function AboutSection() {
 
           {/* First paragraph */}
           <p className="about-text">
-            <span className="about-circled">
+            <span className="about-red-underlined">
               Desenvolvedor Full Stack
-              <SketchCircle />
+              <SketchRedUnderline width={220} />
             </span>{' '}
             e estudante de Licenciatura em Computação na{' '}
             <span className="about-highlighted">UFPR</span>{' '}
@@ -221,9 +214,9 @@ export default function AboutSection() {
             <span className="about-highlighted">React</span>,{' '}
             <span className="about-highlighted">Next.js</span> e{' '}
             <span className="about-highlighted">Python</span>, além de estar mergulhado no mundo da{' '}
-            <span className="about-circled">
+            <span className="about-red-underlined">
               infraestrutura em nuvem (AWS)
-              <SketchCircle />
+              <SketchRedUnderline width={280} />
             </span>.
           </p>
         </div>
