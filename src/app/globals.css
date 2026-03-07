@@ -1571,32 +1571,185 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ===== HAMBURGER MENU (mobile) ===== */
+.hamburger-btn {
+  position: relative;
+  z-index: 110;
+  width: 44px;
+  height: 44px;
+  background: #fef3c7;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px;
+  box-shadow:
+    3px 4px 10px rgba(0, 0, 0, 0.12),
+    2px 2px 4px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+}
+
+.hamburger-btn:hover {
+  transform: scale(1.05) rotate(-2deg);
+}
+
+.hamburger-line {
+  display: block;
+  width: 24px;
+  height: 2.5px;
+  background: #3d3d3d;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  /* Hand-drawn feel */
+  transform-origin: center;
+}
+
+/* Animate to X when open */
+.hamburger-btn.open .hamburger-line:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+
+.hamburger-btn.open .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-btn.open .hamburger-line:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
 /* ===== RESPONSIVE ===== */
+
+/* ---------- NOTEBOOK (≤1024px) ---------- */
+@media (max-width: 1024px) {
+  .home-section {
+    gap: 2.5rem;
+    max-width: 900px;
+  }
+
+  .head-photo {
+    width: 360px;
+  }
+
+  .stick-body {
+    margin-top: -120px;
+  }
+
+  .greeting {
+    font-size: 2.8rem;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  /* Pull icons inward & scale down */
+  .icon-wrapper {
+    transform: scale(0.8);
+  }
+
+  .icon-wrapper.icon.book {
+    left: -4%;
+  }
+
+  .icon-wrapper.icon.chess {
+    right: -4%;
+  }
+
+  .icon-wrapper.icon.bug {
+    right: 0%;
+  }
+
+  .icon-wrapper.icon.coffee {
+    left: -8%;
+  }
+
+  .icon-wrapper.icon.computer {
+    right: -10%;
+  }
+
+  .icon-wrapper.icon.cassette {
+    left: -4%;
+  }
+
+  /* Sections */
+  .about-section,
+  .experience-section,
+  .projects-section,
+  .contact-section {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .about-card {
+    max-width: 600px;
+  }
+
+  .exp-card {
+    max-width: 640px;
+  }
+}
+
+/* ---------- TABLET (≤768px) ---------- */
 @media (max-width: 768px) {
-  .header {
-    top: 8px;
-    transform: translateX(-50%) rotate(-1.5deg);
+  /* Header → hamburger */
+  .header.header-mobile {
+    top: 12px;
+    right: 16px;
+    left: auto;
+    transform: none;
   }
 
-  .nav-bar {
-    padding: 0.7rem 0.9rem;
-    min-width: auto;
+  .nav-bar.mobile-closed {
+    display: none;
   }
 
-  .nav-bar a {
-    font-size: 1rem;
-    padding: 0.2rem 0.4rem;
+  .nav-bar.mobile-open {
+    position: absolute;
+    top: 52px;
+    right: 0;
+    padding: 1rem 1.5rem;
+    min-width: 200px;
+    box-shadow:
+      4px 6px 16px rgba(0, 0, 0, 0.15),
+      2px 3px 6px rgba(0, 0, 0, 0.08);
+    animation: menu-slide-in 0.25s ease;
   }
 
-  .separator {
-    margin: 0 0.1rem;
-    font-size: 0.9rem;
+  .nav-bar.mobile-open ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
 
+  .nav-bar.mobile-open .separator {
+    display: none;
+  }
+
+  .nav-bar.mobile-open a {
+    font-size: 1.25rem;
+    padding: 0.35rem 0.5rem;
+  }
+
+  @keyframes menu-slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px) rotate(1deg);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
+  }
+
+  /* Home */
   .home-section {
     flex-direction: column;
     gap: 2rem;
     text-align: center;
+    min-height: calc(100vh - 80px);
   }
 
   .hero-text {
@@ -1604,7 +1757,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
   }
 
   .greeting {
-    font-size: 2rem;
+    font-size: 2.2rem;
     justify-content: center;
   }
 
@@ -1612,10 +1765,53 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
     font-size: 1.8rem;
   }
 
-  .icon {
+  .head-photo {
+    width: 260px;
+  }
+
+  .stick-body {
+    margin-top: -95px;
+    transform: scale(0.85);
+  }
+
+  /* Icons: scale down further, keep a few visible */
+  .icon-wrapper {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+
+  .icon-wrapper.icon.coffee,
+  .icon-wrapper.icon.computer,
+  .icon-wrapper.icon.cassette,
+  .icon-wrapper.icon.floppy {
     display: none;
   }
 
+  .icon-wrapper.icon.book {
+    top: 5%;
+    left: -2%;
+  }
+
+  .icon-wrapper.icon.cloud {
+    top: 3%;
+    left: 50%;
+  }
+
+  .icon-wrapper.icon.chess {
+    top: 5%;
+    right: -2%;
+  }
+
+  .icon-wrapper.icon.bug {
+    top: 30%;
+    right: 0%;
+  }
+
+  .icon-tooltip {
+    display: none !important;
+  }
+
+  /* Experience */
   .experience-section {
     padding: 3rem 1rem 4rem;
   }
@@ -1627,6 +1823,10 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
   .exp-card {
     padding: 2rem 1.5rem 1.5rem;
     transform: rotate(0deg);
+  }
+
+  .exp-card::before {
+    left: 20px;
   }
 
   .exp-header {
@@ -1654,7 +1854,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
     font-size: 1.5rem;
   }
 
-  /* About responsive */
+  /* About */
   .about-section {
     padding: 3rem 1rem 4rem;
   }
@@ -1677,6 +1877,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
   .about-card {
     padding: 2rem 1.5rem 1.5rem 2rem;
     transform: rotate(0deg);
+    max-width: 100%;
   }
 
   .about-text {
@@ -1689,7 +1890,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
     display: none;
   }
 
-  /* Projects responsive */
+  /* Projects */
   .projects-section {
     padding: 3rem 1rem 4rem;
   }
@@ -1704,7 +1905,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
   }
 
   .proj-card {
-    transform: rotate(0deg);
+    transform: rotate(0deg) !important;
     padding: 2rem 1.5rem 1.5rem;
   }
 
@@ -1720,9 +1921,10 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
     opacity: 0.4;
   }
 
-  /* Contact responsive */
+  /* Contact */
   .contact-section {
     padding: 3rem 1rem 2rem;
+    min-height: auto;
   }
 
   .contact-title {
@@ -1752,16 +1954,237 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
     height: 40px;
   }
 
+  /* Drawing toolbar */
+  .drawing-toolbar {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .drawing-toolbar-toggle {
+    width: 44px;
+    height: 44px;
+  }
+
+  .drawing-hint-bubble {
+    bottom: 62px;
+    right: 8px;
+  }
+}
+
+/* ---------- CELULAR (≤480px) ---------- */
+@media (max-width: 480px) {
+  body {
+    /* Remove vertical margin line on very small screens */
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 31px,
+        var(--line-color) 31px,
+        var(--line-color) 32px
+      );
+  }
+
+  .main-content {
+    padding: 1rem;
+    padding-top: 60px;
+  }
+
+  /* Home */
+  .home-section {
+    gap: 1.5rem;
+    min-height: calc(100vh - 60px);
+  }
+
+  .greeting {
+    font-size: 1.7rem;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
   .head-photo {
-    width: 220px;
-    height: auto;
+    width: 190px;
   }
 
   .stick-body {
+    margin-top: -70px;
+    transform: scale(0.7);
+  }
+
+  /* Hide ALL icons on phone */
+  .icon-wrapper {
+    display: none !important;
+  }
+
+  /* Section divider */
+  .section-divider {
+    max-width: 200px;
+    height: 30px;
+  }
+
+  /* Experience */
+  .experience-section {
+    padding: 2rem 0.8rem 3rem;
+    min-height: auto;
+  }
+
+  .exp-title {
+    font-size: 1.8rem;
+  }
+
+  .exp-card {
+    padding: 1.5rem 1rem 1.2rem;
+  }
+
+  .exp-card::before {
+    display: none;
+  }
+
+  .exp-role {
+    font-size: 1.15rem;
+  }
+
+  .exp-company {
+    font-size: 1.3rem;
+  }
+
+  .exp-company::before {
+    display: none;
+  }
+
+  .exp-period {
+    font-size: 0.85rem;
+  }
+
+  .exp-description {
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .exp-tech-tag {
+    font-size: 0.85rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  /* About */
+  .about-section {
+    padding: 2rem 0.8rem 3rem;
+  }
+
+  .about-title {
+    font-size: 1.8rem;
+  }
+
+  .about-doodles-left,
+  .about-doodles-right {
+    gap: 1rem;
     transform: scale(0.8);
   }
 
-  .stick-figure-container {
-    margin-top: 10px;
+  .about-card {
+    padding: 1.5rem 1rem 1.2rem;
+  }
+
+  .about-text {
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .about-red-underlined {
+    white-space: normal;
+  }
+
+  /* Projects */
+  .projects-section {
+    padding: 2rem 0.8rem 3rem;
+  }
+
+  .proj-title {
+    font-size: 1.8rem;
+  }
+
+  .proj-card {
+    padding: 1.5rem 1rem 1.2rem;
+  }
+
+  .proj-card-title {
+    font-size: 1.2rem;
+    padding-right: 45px;
+  }
+
+  .proj-card-desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .proj-tech-tag {
+    font-size: 0.8rem;
+  }
+
+  .proj-btn {
+    font-size: 0.9rem;
+    padding: 0.35rem 0.8rem;
+  }
+
+  .proj-doodle-wrapper {
+    transform: scale(0.7);
+    top: 4px;
+    right: 4px;
+  }
+
+  /* Contact */
+  .contact-section {
+    padding: 2rem 0.8rem 2rem;
+  }
+
+  .contact-title {
+    font-size: 1.8rem;
+  }
+
+  .contact-note {
+    padding: 2rem 1.2rem 1.5rem;
+  }
+
+  .contact-header-text {
+    font-size: 1.15rem;
+  }
+
+  .contact-link {
+    font-size: 0.95rem;
+  }
+
+  .contact-link-doodle svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .contact-links {
+    gap: 1.2rem;
+  }
+
+  /* Footer */
+  .site-footer {
+    padding: 1.5rem 0.8rem 2rem;
+  }
+
+  .footer-text {
+    font-size: 0.8rem;
+  }
+
+  /* Drawing canvas toolbar hidden on phone to avoid clutter */
+  .drawing-toolbar {
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .drawing-toolbar-toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .drawing-hint-bubble {
+    display: none;
   }
 }
