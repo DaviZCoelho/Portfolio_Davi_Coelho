@@ -191,7 +191,7 @@ const projects: Project[] = [
     tech: ['Next.js', 'TypeScript', 'Rough.js'],
     demo: null,
     demoLabel: 'Você já está aqui!',
-    github: null,
+    github: 'https://github.com/DaviZCoelho/Portfolio_Davi_Coelho',
     rotation: -0.9,
     tapeColor: 'rgba(200,220,160,0.6)',
     Doodle: DoodleCode,
