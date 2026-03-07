@@ -4,7 +4,7 @@ Acesse
 
 davicoelho.com.br
 
-*Tecnologias*
+**Tecnologias**
 
 • Next.js — Framework React com renderização estática
 
