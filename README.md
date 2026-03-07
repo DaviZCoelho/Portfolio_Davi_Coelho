@@ -1,10 +1,10 @@
 Meu portfólio pessoal com um layout diferenciado, inspirado em um caderno de rascunhos. A ideia foi fugir dos portfólios tradicionais e criar algo visualmente único, com elementos desenhados à mão, anotações e rabiscos que remetem a um caderno de anotações.
 
-🔗 Acesse
+Acesse
 
 davicoelho.com.br
 
-🛠️ Tecnologias
+Tecnologias
 
 • Next.js — Framework React com renderização estática
 
@@ -12,7 +12,7 @@ davicoelho.com.br
 
 • Rough.js — Geração de elementos SVG com estilo "hand-drawn"
 
-✏️ Funcionalidades
+Funcionalidades
 
 • Seções: Home, Sobre Mim, Experiências, Projetos e Contato
 
