@@ -157,7 +157,7 @@ const projects: Project[] = [
   },
   {
     title: 'Gerador de Thumbnail com IA',
-    description: 'Onde a nuvem e a IA se encontram. Uma aplicação serverless que usa AWS Lambda e Docker para processar imagens e remover fundos automaticamente. Infraestrutura pura!',
+    description: 'Onde a nuvem e a IA se encontram. Uma aplicação serverless que usa AWS Lambda e Docker para processar imagens e remover fundos automaticamente.',
     tech: ['React', 'AWS Lambda', 'Python', 'Docker'],
     demo: 'https://gerador-de-thumbnail.vercel.app/',
     github: 'https://github.com/DaviZCoelho/Gerador_De_Thumbnail',
