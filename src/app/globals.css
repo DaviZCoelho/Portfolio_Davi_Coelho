@@ -25,16 +25,16 @@ body {
       var(--margin-color) 62px,
       transparent 62px
     ),
-    /* Linhas horizontais do caderno - 1px real via border-image trick */
+    /* Linhas horizontais do caderno - 1px real, altura fixa */
     repeating-linear-gradient(
       to bottom,
       transparent 0px,
-      transparent 31px,
-      var(--line-color) 31px,
-      var(--line-color) 32px
+      transparent 29px,
+      var(--line-color) 29px,
+      var(--line-color) 30px
     );
   background-attachment: local;
-  background-size: 100% 32px;
+  background-size: 100% 30px;
   color: var(--foreground);
   font-family: var(--font-indie), cursive;
   min-height: 100vh;
@@ -214,7 +214,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4rem;
+  gap: clamp(1.5rem, 4vw, 4rem);
   flex-wrap: wrap;
   max-width: 1200px;
   width: 100%;
@@ -278,13 +278,13 @@ body {
 }
 
 .head-photo {
-  width: 480px;
+  width: clamp(200px, 30vw, 480px);
   height: auto;
   object-fit: contain;
 }
 
 .stick-body {
-  margin-top: -155px;
+  margin-top: clamp(-155px, -10vw, -80px);
   position: relative;
   z-index: 1;
   overflow: visible;
@@ -1438,8 +1438,8 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 /* Toolbar flutuante - canto inferior direito */
 .drawing-toolbar {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: clamp(16px, 3vh, 24px);
+  right: clamp(16px, 3vw, 24px);
   z-index: 200;
   display: flex;
   flex-direction: column-reverse;
@@ -1626,15 +1626,64 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 
 /* ===== RESPONSIVE ===== */
 
+/* ---------- NOTEBOOKS GRANDES (≤1100px) — zona de segurança dos ícones ---------- */
+@media (max-width: 1100px) {
+  /* Menu post-it: escala -20% */
+  .header {
+    transform: translateX(-50%) rotate(-3deg) scale(0.8);
+  }
+
+  /* Ícones: empurrar para bordas para não sobrepor conteúdo */
+  .icon-wrapper {
+    transform: scale(0.7);
+  }
+
+  .icon-wrapper.icon.book {
+    left: -6%;
+  }
+
+  .icon-wrapper.icon.chess {
+    right: -6%;
+  }
+
+  .icon-wrapper.icon.bug {
+    right: -3%;
+  }
+
+  .icon-wrapper.icon.coffee {
+    left: -10%;
+  }
+
+  .icon-wrapper.icon.computer {
+    right: -12%;
+    bottom: 25%;
+  }
+
+  .icon-wrapper.icon.cassette {
+    left: -6%;
+  }
+
+  .icon-wrapper.icon.floppy {
+    right: 20%;
+  }
+
+  /* Empurrar toolbar/hint para cima da zona do computador */
+  .drawing-toolbar {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .drawing-hint-bubble {
+    bottom: 66px;
+    right: 6px;
+  }
+}
+
 /* ---------- NOTEBOOK (≤1024px) ---------- */
 @media (max-width: 1024px) {
   .home-section {
     gap: 2.5rem;
     max-width: 900px;
-  }
-
-  .head-photo {
-    width: clamp(260px, 35vw, 360px);
   }
 
   .stick-body {
@@ -1643,7 +1692,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 
   /* Pull icons inward & scale down */
   .icon-wrapper {
-    transform: scale(0.75);
+    transform: scale(0.65);
   }
 
   .icon-wrapper.icon.book {
@@ -1691,11 +1740,6 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 
   .exp-card {
     max-width: 640px;
-  }
-
-  /* Notebook lines fix */
-  body {
-    background-size: 100% 32px;
   }
 }
 
@@ -1767,25 +1811,17 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
     justify-content: center;
   }
 
-  .head-photo {
-    width: clamp(190px, 40vw, 260px);
-  }
-
-  .stick-body {
-    margin-top: -95px;
-    transform: scale(0.85);
-  }
-
   /* Icons: scale down further, keep a few visible */
   .icon-wrapper {
-    transform: scale(0.6);
-    opacity: 0.4;
+    transform: scale(0.55);
+    opacity: 0.35;
   }
 
   .icon-wrapper.icon.coffee,
   .icon-wrapper.icon.computer,
   .icon-wrapper.icon.cassette,
-  .icon-wrapper.icon.floppy {
+  .icon-wrapper.icon.floppy,
+  .icon-wrapper.icon.bug {
     display: none;
   }
 
@@ -1965,11 +2001,11 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
       repeating-linear-gradient(
         to bottom,
         transparent 0px,
-        transparent 31px,
-        var(--line-color) 31px,
-        var(--line-color) 32px
+        transparent 29px,
+        var(--line-color) 29px,
+        var(--line-color) 30px
       );
-    background-size: 100% 32px;
+    background-size: 100% 30px;
   }
 
   .main-content {
@@ -1981,15 +2017,6 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
   .home-section {
     gap: 1.5rem;
     min-height: calc(100vh - 60px);
-  }
-
-  .head-photo {
-    width: 190px;
-  }
-
-  .stick-body {
-    margin-top: -70px;
-    transform: scale(0.7);
   }
 
   /* Hide ALL icons on phone */
