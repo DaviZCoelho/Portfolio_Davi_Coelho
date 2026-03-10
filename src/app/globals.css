@@ -268,13 +268,13 @@ body {
   flex-direction: column;
   align-items: center;
   position: relative;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .head {
   position: relative;
   z-index: 2;
-  margin-bottom: -6px;
+  margin-bottom: -24px;
 }
 
 .head-photo {
@@ -504,7 +504,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 
 .icon-wrapper.icon.coffee {
   bottom: 40%;
-  left: -3%;
+  left: -6%;
 }
 
 .icon-wrapper.icon.floppy {
@@ -514,7 +514,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 }
 
 .icon-wrapper.icon.computer {
-  bottom: 20%;
+  bottom: 17%;
   right: -3%;
   left: auto;
 }
