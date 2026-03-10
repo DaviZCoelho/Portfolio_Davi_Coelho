@@ -203,7 +203,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 2rem;
+  padding: 2rem clamp(1rem, 5%, 3rem);
   padding-top: 80px;
   position: relative;
   overflow-x: hidden;
@@ -219,6 +219,7 @@ body {
   max-width: 1200px;
   width: 100%;
   min-height: calc(100vh - 120px);
+  padding: 0 5%;
   position: relative;
   overflow: visible;
   scroll-margin-top: 90px;
@@ -278,13 +279,15 @@ body {
 }
 
 .head-photo {
-  width: clamp(200px, 30vw, 480px);
+  width: clamp(150px, 22vw, 420px);
   height: auto;
   object-fit: contain;
 }
 
 .stick-body {
-  margin-top: clamp(-155px, -10vw, -80px);
+  width: clamp(80px, 10vw, 140px);
+  height: auto;
+  margin-top: clamp(-100px, -7vw, -40px);
   position: relative;
   z-index: 1;
   overflow: visible;
@@ -472,11 +475,17 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
   right: 30px;
 }
 
-/* Posições dos ícones — usando % para fluidez */
+/* Ícones: tamanho proporcional ao viewport */
+.icon-wrapper svg {
+  width: clamp(35px, 5vw, 100%);
+  height: auto;
+}
+
+/* Posições dos ícones — coordenadas % com margem de segurança */
 
 .icon-wrapper.icon.book {
   top: 11%;
-  left: max(-10%, -5vw);
+  left: -2%;
 }
 
 .icon-wrapper.icon.cloud {
@@ -486,19 +495,19 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 
 .icon-wrapper.icon.chess {
   top: 12%;
-  right: max(-10%, -5vw);
+  right: -2%;
   left: auto;
 }
 
 .icon-wrapper.icon.bug {
   top: 38%;
-  right: max(-5%, -2.5vw);
+  right: -1%;
   left: auto;
 }
 
 .icon-wrapper.icon.coffee {
   bottom: 40%;
-  left: max(-17%, -8vw);
+  left: -3%;
 }
 
 .icon-wrapper.icon.floppy {
@@ -509,13 +518,13 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 
 .icon-wrapper.icon.computer {
   bottom: 20%;
-  right: max(-20%, -10vw);
+  right: -3%;
   left: auto;
 }
 
 .icon-wrapper.icon.cassette {
   bottom: 10%;
-  left: max(-10%, -5vw);
+  left: -2%;
 }
 
 /* ===== EXPERIENCE SECTION ===== */
@@ -556,7 +565,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 .exp-card {
   position: relative;
   background: #fef9e7;
-  padding: 2.5rem 2.5rem 2rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.5rem) clamp(1.2rem, 2.5vw, 2rem);
   max-width: 720px;
   width: 100%;
   border: none;
@@ -625,13 +634,13 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 
 .exp-role {
   font-family: var(--font-shadows), cursive;
-  font-size: 1.6rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
   color: #2d2d2d;
 }
 
 .exp-company {
   font-family: var(--font-caveat), cursive;
-  font-size: 1.9rem;
+  font-size: clamp(1.2rem, 3vw, 1.9rem);
   font-weight: 700;
   color: #4a90d9;
   position: relative;
@@ -665,7 +674,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 /* Description text */
 .exp-description {
   font-family: var(--font-indie), cursive;
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 2vw, 1.3rem);
   line-height: 1.9;
   color: #3a3a3a;
   padding-left: 20px;
@@ -850,7 +859,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 .about-card {
   position: relative;
   background: #fdfbf7;
-  padding: 3rem 3rem 2.5rem 3.5rem;
+  padding: clamp(1.5rem, 3.5vw, 3rem) clamp(1.5rem, 3.5vw, 3rem) clamp(1.2rem, 3vw, 2.5rem) clamp(1.5rem, 4vw, 3.5rem);
   max-width: 720px;
   width: 100%;
   border: none;
@@ -910,7 +919,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 /* Text */
 .about-text {
   font-family: var(--font-indie), cursive;
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 2vw, 1.3rem);
   line-height: 2;
   color: #3a3a3a;
   margin-bottom: 1.5rem;
@@ -1098,7 +1107,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 /* Card title */
 .proj-card-title {
   font-family: var(--font-shadows), cursive;
-  font-size: 1.55rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.55rem);
   font-weight: 400;
   color: #2d2d2d;
   margin-bottom: 0.8rem;
@@ -1109,7 +1118,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 /* Card description */
 .proj-card-desc {
   font-family: var(--font-indie), cursive;
-  font-size: 1.15rem;
+  font-size: clamp(0.9rem, 1.8vw, 1.15rem);
   line-height: 1.8;
   color: #444;
   margin-bottom: 1.2rem;
@@ -1269,7 +1278,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 .contact-note {
   position: relative;
   background: #fef9e7;
-  padding: 3rem 3rem 2.5rem;
+  padding: clamp(1.5rem, 3.5vw, 3rem) clamp(1.5rem, 3.5vw, 3rem) clamp(1.2rem, 3vw, 2.5rem);
   max-width: 580px;
   width: 100%;
   transform: rotate(-1.2deg);
@@ -1323,7 +1332,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 /* Header text */
 .contact-header-text {
   font-family: var(--font-shadows), cursive;
-  font-size: 1.6rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
   color: #2d2d2d;
   margin-bottom: 2rem;
   text-align: center;
@@ -1360,7 +1369,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 
 .contact-link {
   font-family: var(--font-indie), cursive;
-  font-size: 1.25rem;
+  font-size: clamp(0.9rem, 2vw, 1.25rem);
   color: #3a3a3a;
   text-decoration: none;
   position: relative;
@@ -1626,48 +1635,32 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 
 /* ===== RESPONSIVE ===== */
 
-/* ---------- NOTEBOOKS GRANDES (≤1100px) — zona de segurança dos ícones ---------- */
-@media (max-width: 1100px) {
-  /* Menu post-it: escala -20% */
+/* ---------- DESKTOP MÉDIO (≤1280px) — menu e ícones começam a encolher ---------- */
+@media (max-width: 1280px) {
   .header {
-    transform: translateX(-50%) rotate(-3deg) scale(0.8);
+    transform: translateX(-50%) rotate(-3deg) scale(0.88);
   }
 
-  /* Ícones: empurrar para bordas para não sobrepor conteúdo */
   .icon-wrapper {
-    transform: scale(0.7);
+    transform: scale(0.8);
+  }
+}
+
+/* ---------- NOTEBOOKS GRANDES (≤1100px) — esconder ícones das pontas ---------- */
+@media (max-width: 1100px) {
+  .header {
+    transform: translateX(-50%) rotate(-3deg) scale(0.75);
   }
 
-  .icon-wrapper.icon.book {
-    left: -6%;
+  .icon-wrapper {
+    transform: scale(0.65);
   }
 
-  .icon-wrapper.icon.chess {
-    right: -6%;
-  }
-
+  .icon-wrapper.icon.coffee,
   .icon-wrapper.icon.bug {
-    right: -3%;
+    display: none;
   }
 
-  .icon-wrapper.icon.coffee {
-    left: -10%;
-  }
-
-  .icon-wrapper.icon.computer {
-    right: -12%;
-    bottom: 25%;
-  }
-
-  .icon-wrapper.icon.cassette {
-    left: -6%;
-  }
-
-  .icon-wrapper.icon.floppy {
-    right: 20%;
-  }
-
-  /* Empurrar toolbar/hint para cima da zona do computador */
   .drawing-toolbar {
     bottom: 16px;
     right: 16px;
@@ -1681,57 +1674,15 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 
 /* ---------- NOTEBOOK (≤1024px) ---------- */
 @media (max-width: 1024px) {
-  .home-section {
-    gap: 2.5rem;
-    max-width: 900px;
-  }
-
-  .stick-body {
-    margin-top: -120px;
-  }
-
-  /* Pull icons inward & scale down */
   .icon-wrapper {
-    transform: scale(0.65);
+    transform: scale(0.55);
   }
 
-  .icon-wrapper.icon.book {
-    left: -2%;
-  }
-
-  .icon-wrapper.icon.chess {
-    right: -2%;
-  }
-
-  .icon-wrapper.icon.bug {
-    right: 1%;
-  }
-
-  .icon-wrapper.icon.coffee {
-    left: -4%;
-  }
-
-  .icon-wrapper.icon.computer {
-    right: -5%;
-  }
-
-  .icon-wrapper.icon.cassette {
-    left: -2%;
-  }
-
-  /* Icons on far edges hidden */
   .icon-wrapper.icon.coffee,
-  .icon-wrapper.icon.computer {
+  .icon-wrapper.icon.computer,
+  .icon-wrapper.icon.cassette,
+  .icon-wrapper.icon.bug {
     display: none;
-  }
-
-  /* Sections */
-  .about-section,
-  .experience-section,
-  .projects-section,
-  .contact-section {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
   }
 
   .about-card {
@@ -1798,7 +1749,6 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
   /* Home */
   .home-section {
     flex-direction: column;
-    gap: 2rem;
     text-align: center;
     min-height: calc(100vh - 80px);
   }
@@ -1811,38 +1761,9 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
     justify-content: center;
   }
 
-  /* Icons: scale down further, keep a few visible */
+  /* Esconder TODOS os ícones no tablet */
   .icon-wrapper {
-    transform: scale(0.55);
-    opacity: 0.35;
-  }
-
-  .icon-wrapper.icon.coffee,
-  .icon-wrapper.icon.computer,
-  .icon-wrapper.icon.cassette,
-  .icon-wrapper.icon.floppy,
-  .icon-wrapper.icon.bug {
-    display: none;
-  }
-
-  .icon-wrapper.icon.book {
-    top: 5%;
-    left: -2%;
-  }
-
-  .icon-wrapper.icon.cloud {
-    top: 3%;
-    left: 50%;
-  }
-
-  .icon-wrapper.icon.chess {
-    top: 5%;
-    right: -2%;
-  }
-
-  .icon-wrapper.icon.bug {
-    top: 30%;
-    right: 0%;
+    display: none !important;
   }
 
   .icon-tooltip {
@@ -1855,7 +1776,6 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
   }
 
   .exp-card {
-    padding: 2rem 1.5rem 1.5rem;
     transform: rotate(0deg);
   }
 
@@ -1869,7 +1789,6 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 
   .exp-description {
     padding-left: 0;
-    font-size: 1.15rem;
   }
 
   .exp-tech-stack {
@@ -1878,14 +1797,6 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 
   .exp-doodle {
     display: none;
-  }
-
-  .exp-role {
-    font-size: 1.3rem;
-  }
-
-  .exp-company {
-    font-size: 1.5rem;
   }
 
   /* About */
@@ -1905,14 +1816,12 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
   }
 
   .about-card {
-    padding: 2rem 1.5rem 1.5rem 2rem;
     transform: rotate(0deg);
     max-width: 100%;
   }
 
   .about-text {
     padding-left: 0;
-    font-size: 1.15rem;
     line-height: 1.85;
   }
 
@@ -1932,15 +1841,6 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 
   .proj-card {
     transform: rotate(0deg) !important;
-    padding: 2rem 1.5rem 1.5rem;
-  }
-
-  .proj-card-title {
-    font-size: 1.35rem;
-  }
-
-  .proj-card-desc {
-    font-size: 1.05rem;
   }
 
   .proj-doodle-wrapper {
@@ -1954,17 +1854,8 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
   }
 
   .contact-note {
-    padding: 2.5rem 1.8rem 2rem;
     transform: rotate(0deg);
     clip-path: none;
-  }
-
-  .contact-header-text {
-    font-size: 1.35rem;
-  }
-
-  .contact-link {
-    font-size: 1.08rem;
   }
 
   .contact-deco {
@@ -1996,7 +1887,6 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
 /* ---------- CELULAR (≤480px) ---------- */
 @media (max-width: 480px) {
   body {
-    /* Remove vertical margin line on very small screens */
     background-image:
       repeating-linear-gradient(
         to bottom,
@@ -2013,18 +1903,10 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
     padding-top: 60px;
   }
 
-  /* Home */
   .home-section {
-    gap: 1.5rem;
     min-height: calc(100vh - 60px);
   }
 
-  /* Hide ALL icons on phone */
-  .icon-wrapper {
-    display: none !important;
-  }
-
-  /* Section divider */
   .section-divider {
     max-width: 200px;
     height: 30px;
@@ -2036,32 +1918,15 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
     min-height: auto;
   }
 
-  .exp-card {
-    padding: 1.5rem 1rem 1.2rem;
-  }
-
   .exp-card::before {
     display: none;
-  }
-
-  .exp-role {
-    font-size: 1.15rem;
-  }
-
-  .exp-company {
-    font-size: 1.3rem;
   }
 
   .exp-company::before {
     display: none;
   }
 
-  .exp-period {
-    font-size: 0.85rem;
-  }
-
   .exp-description {
-    font-size: 1.05rem;
     line-height: 1.75;
   }
 
@@ -2081,12 +1946,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
     transform: scale(0.8);
   }
 
-  .about-card {
-    padding: 1.5rem 1rem 1.2rem;
-  }
-
   .about-text {
-    font-size: 1.05rem;
     line-height: 1.75;
   }
 
@@ -2099,27 +1959,12 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
     padding: 2rem 0.8rem 3rem;
   }
 
-  .proj-card {
-    padding: 1.5rem 1rem 1.2rem;
-  }
-
   .proj-card-title {
-    font-size: 1.2rem;
     padding-right: 45px;
   }
 
   .proj-card-desc {
-    font-size: 0.95rem;
     line-height: 1.7;
-  }
-
-  .proj-tech-tag {
-    font-size: 0.8rem;
-  }
-
-  .proj-btn {
-    font-size: 0.9rem;
-    padding: 0.35rem 0.8rem;
   }
 
   .proj-doodle-wrapper {
@@ -2128,21 +1973,14 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
     right: 4px;
   }
 
+  .proj-btn {
+    font-size: 0.9rem;
+    padding: 0.35rem 0.8rem;
+  }
+
   /* Contact */
   .contact-section {
     padding: 2rem 0.8rem 2rem;
-  }
-
-  .contact-note {
-    padding: 2rem 1.2rem 1.5rem;
-  }
-
-  .contact-header-text {
-    font-size: 1.15rem;
-  }
-
-  .contact-link {
-    font-size: 0.95rem;
   }
 
   .contact-link-doodle svg {
@@ -2163,7 +2001,7 @@ icon-wrapper.icon.coffee .icon-tooltip::after {
     font-size: 0.8rem;
   }
 
-  /* Drawing canvas toolbar hidden on phone to avoid clutter */
+  /* Drawing */
   .drawing-toolbar {
     bottom: 12px;
     right: 12px;
