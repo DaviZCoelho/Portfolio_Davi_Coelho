@@ -268,6 +268,7 @@ body {
   flex-direction: column;
   align-items: center;
   position: relative;
+  z-index: 5;
   margin-top: 5px;
 }
 
@@ -353,6 +354,7 @@ body {
   opacity: 0.7;
   transition: all 0.3s ease;
   cursor: pointer;
+  z-index: 10;
 }
 
 .icon-wrapper:hover {
@@ -405,16 +407,32 @@ body {
 }
 
 /* Ajuste de tooltip para ícones da esquerda */
-.icon-wrapper.icon.book .icon-tooltip,
-icon-wrapper.icon.book .icon-tooltip,
-icon-wrapper.icon.coffee .icon-tooltip {
+.icon-wrapper.icon.book .icon-tooltip {
   left: 7px;
   transform: translateX(0);
 }
 
-.icon-wrapper.icon.book .icon-tooltip::after,
-icon-wrapper.icon.book .icon-tooltip::after,
-icon-wrapper.icon.coffee .icon-tooltip::after {
+.icon-wrapper.icon.book .icon-tooltip::after {
+  left: 30px;
+}
+
+/* Tooltip do café: centralizado acima do ícone, na frente do corpo */
+.icon-wrapper.icon.coffee .icon-tooltip {
+  left: 7px;
+  bottom: calc(100% + 18px);
+  transform: translateX(0);
+}
+.icon-wrapper.icon.coffee .icon-tooltip::after {
+  left: 30px;
+}
+
+/* Tooltip da cassete: centralizado acima do ícone, na frente do corpo */
+.icon-wrapper.icon.cassette .icon-tooltip {
+  left: 7px;
+  bottom: calc(100% + 18px);
+  transform: translateX(0);
+}
+.icon-wrapper.icon.cassette .icon-tooltip::after {
   left: 30px;
 }
 /* Tooltip para nuvem e disquete: aparece abaixo */
