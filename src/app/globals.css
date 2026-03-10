@@ -219,7 +219,6 @@ body {
   max-width: 1200px;
   width: 100%;
   min-height: calc(100vh - 120px);
-  padding: 0 5%;
   position: relative;
   overflow: visible;
   scroll-margin-top: 90px;
@@ -279,15 +278,13 @@ body {
 }
 
 .head-photo {
-  width: clamp(150px, 22vw, 420px);
+  width: clamp(180px, 28vw, 420px);
   height: auto;
   object-fit: contain;
 }
 
 .stick-body {
-  width: clamp(80px, 10vw, 140px);
-  height: auto;
-  margin-top: clamp(-100px, -7vw, -40px);
+  margin-top: clamp(-120px, -9vw, -60px);
   position: relative;
   z-index: 1;
   overflow: visible;
