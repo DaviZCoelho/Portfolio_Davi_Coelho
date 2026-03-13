@@ -166,7 +166,7 @@ function SketchWaveUnderline({ width = 120, className }: { width?: number; class
 
 export default function AboutSection() {
   return (
-    <section className="about-section" id="sobre mim">
+    <section className="about-section" id="sobre-mim">
       {/* Title */}
       <div className="about-title-wrapper">
         <h2 className="about-title">Sobre Mim</h2>
