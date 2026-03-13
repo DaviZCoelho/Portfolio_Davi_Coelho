@@ -105,7 +105,6 @@ export default function DrawingCanvas() {
   const [tool, setTool] = useState<Tool>('none');
   const [isDrawing, setIsDrawing] = useState(false);
   const [toolbarOpen, setToolbarOpen] = useState(false);
-  const [isHome, setIsHome] = useState(true);
   const lastPos = useRef<{ x: number; y: number } | null>(null);
 
   // Resize canvas to match full document height
@@ -144,24 +143,12 @@ export default function DrawingCanvas() {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Track scroll to show/hide hint and toolbar on Home
-    const handleScroll = () => {
-      const onHome = window.scrollY < window.innerHeight * 0.6;
-      setIsHome(onHome);
-      if (!onHome) {
-        setToolbarOpen(false);
-        setTool('none');
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
     // Also resize on scroll if document height changes (lazy loaded content)
     const observer = new ResizeObserver(resizeCanvas);
     observer.observe(document.body);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
     };
   }, [resizeCanvas]);
@@ -175,14 +162,14 @@ export default function DrawingCanvas() {
     if ('touches' in e) {
       const touch = e.touches[0] || e.changedTouches[0];
       return {
-        x: touch.clientX - rect.left + window.scrollX,
-        y: touch.clientY - rect.top + window.scrollY,
+        x: touch.clientX - rect.left,
+        y: touch.clientY - rect.top,
       };
     }
 
     return {
-      x: e.clientX - rect.left + window.scrollX,
-      y: e.clientY - rect.top + window.scrollY,
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
     };
   };
 
@@ -274,57 +261,55 @@ export default function DrawingCanvas() {
         `}</style>
       )}
 
-      {/* Balão de dica — aparece apenas na Home e toolbar fechada */}
-      {isHome && !toolbarOpen && (
+      {/* Balão de dica — aparece quando a toolbar esta fechada */}
+      {!toolbarOpen && (
         <div className="drawing-hint-bubble">
           <DrawingHintBubble />
           <span className="drawing-hint-text">clique aqui para desenhar</span>
         </div>
       )}
 
-      {/* Toolbar flutuante — só aparece na Home */}
-      {isHome && (
-        <div className={`drawing-toolbar ${toolbarOpen ? 'open' : ''}`}>
-          {/* Botão toggle */}
-          <button
-            className="drawing-toolbar-toggle"
-            onClick={() => {
-              setToolbarOpen((prev) => !prev);
-              if (toolbarOpen) setTool('none');
-            }}
-            title={toolbarOpen ? 'Fechar ferramentas' : 'Abrir ferramentas de desenho'}
-            aria-label="Toggle ferramentas de desenho"
-          >
-            <svg width={28} height={28} viewBox="0 0 28 28" fill="none">
-              {toolbarOpen ? (
-                // X icon
-                <>
-                  <line x1="7" y1="7" x2="21" y2="21" stroke="#555" strokeWidth="2.5" strokeLinecap="round" />
-                  <line x1="21" y1="7" x2="7" y2="21" stroke="#555" strokeWidth="2.5" strokeLinecap="round" />
-                </>
-              ) : (
-                // Pencil icon mini
-                <>
-                  <path d="M6,22 L18,10 L20,12 L8,24 Z" fill="#555" />
-                  <path d="M18,10 L20,8 Q21,7 22,8 L22,8 Q23,9 22,10 L20,12 Z" fill="#888" />
-                  <line x1="6" y1="22" x2="8" y2="24" stroke="#555" strokeWidth="1.5" />
-                  <circle cx="5" cy="24" r="1.5" fill="#555" />
-                </>
-              )}
-            </svg>
-          </button>
+      {/* Toolbar flutuante */}
+      <div className={`drawing-toolbar ${toolbarOpen ? 'open' : ''}`}>
+        {/* Botão toggle */}
+        <button
+          className="drawing-toolbar-toggle"
+          onClick={() => {
+            setToolbarOpen((prev) => !prev);
+            if (toolbarOpen) setTool('none');
+          }}
+          title={toolbarOpen ? 'Fechar ferramentas' : 'Abrir ferramentas de desenho'}
+          aria-label="Toggle ferramentas de desenho"
+        >
+          <svg width={28} height={28} viewBox="0 0 28 28" fill="none">
+            {toolbarOpen ? (
+              // X icon
+              <>
+                <line x1="7" y1="7" x2="21" y2="21" stroke="#555" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="21" y1="7" x2="7" y2="21" stroke="#555" strokeWidth="2.5" strokeLinecap="round" />
+              </>
+            ) : (
+              // Pencil icon mini
+              <>
+                <path d="M6,22 L18,10 L20,12 L8,24 Z" fill="#555" />
+                <path d="M18,10 L20,8 Q21,7 22,8 L22,8 Q23,9 22,10 L20,12 Z" fill="#888" />
+                <line x1="6" y1="22" x2="8" y2="24" stroke="#555" strokeWidth="1.5" />
+                <circle cx="5" cy="24" r="1.5" fill="#555" />
+              </>
+            )}
+          </svg>
+        </button>
 
-          {/* Ferramentas */}
-          {toolbarOpen && (
-            <div className="drawing-tools">
-              <ToolIcon type="pencil" active={tool === 'pencil'} onClick={() => toggleTool('pencil')} />
-              <ToolIcon type="eraser" active={tool === 'eraser'} onClick={() => toggleTool('eraser')} />
-              <div className="drawing-tool-divider" />
-              <ToolIcon type="clear" onClick={clearCanvas} />
-            </div>
-          )}
-        </div>
-      )}
+        {/* Ferramentas */}
+        {toolbarOpen && (
+          <div className="drawing-tools">
+            <ToolIcon type="pencil" active={tool === 'pencil'} onClick={() => toggleTool('pencil')} />
+            <ToolIcon type="eraser" active={tool === 'eraser'} onClick={() => toggleTool('eraser')} />
+            <div className="drawing-tool-divider" />
+            <ToolIcon type="clear" onClick={clearCanvas} />
+          </div>
+        )}
+      </div>
     </>
   );
 }
