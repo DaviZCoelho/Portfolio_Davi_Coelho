@@ -1596,6 +1596,36 @@ body {
   letter-spacing: 0.3px;
 }
 
+/* Balão de dica dos ícones "Descubra meus segredos obscuros" */
+.icon-hint-bubble {
+  position: fixed;
+  top: 415px;
+  left: 55px;
+  z-index: 410;
+  pointer-events: none;
+  animation: hint-float 3s ease-in-out infinite, hint-fade-in 0.5s ease;
+}
+
+.icon-hint-bubble-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.icon-hint-text {
+  position: relative;
+  z-index: 1;
+  display: block;
+  font-family: var(--font-caveat), cursive;
+  font-size: 1.15rem;
+  color: #888;
+  white-space: normal;
+  max-width: 340px;
+  padding: 10px 24px 32px;
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+}
+
 @keyframes hint-float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-4px); }
