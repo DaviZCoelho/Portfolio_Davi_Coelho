@@ -131,15 +131,14 @@ export default function DecorativeIcons() {
 
   return (
     <>
-      {/* Balão de dica dos ícones */}
-      {isVisible && showIconHint && (
-        <div className="icon-hint-bubble">
-          <IconHintBubble />
-          <span className="icon-hint-text">Passe o cursor nos ícones e descubra meus segredos obscuros</span>
-        </div>
-      )}
-
       <div ref={containerRef}>
+        {/* Balão de dica dos ícones */}
+        {isVisible && showIconHint && (
+          <div className="icon-hint-bubble">
+            <IconHintBubble />
+            <span className="icon-hint-text">Passe o cursor nos ícones e descubra meus segredos obscuros</span>
+          </div>
+        )}
       <RoughIcon
         className="icon book"
         width={70}
