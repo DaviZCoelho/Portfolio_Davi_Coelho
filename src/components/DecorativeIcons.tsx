@@ -9,9 +9,32 @@ interface RoughIconProps {
   height: number;
   draw: (rc: ReturnType<typeof rough.svg>, svg: SVGSVGElement) => void;
   tooltip?: string;
+  onHover?: () => void;
+  onHoverLeave?: () => void;
 }
 
-function RoughIcon({ className, width, height, draw, tooltip }: RoughIconProps) {
+function IconHintBubble() {
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  useEffect(() => {
+    if (!svgRef.current) return;
+    svgRef.current.innerHTML = '';
+    const rc = rough.svg(svgRef.current);
+    const o = { stroke: '#999', strokeWidth: 1.4, roughness: 2, bowing: 1.5, seed: 42 };
+    
+    // Balão orgânico mais gordinho para baixo
+    svgRef.current.appendChild(
+      rc.path(
+        'M12,8 Q4,8 4,36 Q4,80 12,80 L350,80 Q364,80 364,36 Q364,8 350,8 Z',
+        { ...o, fill: 'rgba(254,249,231,0.9)', fillStyle: 'solid' as const }
+      )
+    );
+  }, []);
+
+  return <svg ref={svgRef} className="icon-hint-bubble-svg" width={333} height={77} viewBox="0 0 376 88" />;
+}
+
+function RoughIcon({ className, width, height, draw, tooltip, onHover, onHoverLeave }: RoughIconProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -23,11 +46,25 @@ function RoughIcon({ className, width, height, draw, tooltip }: RoughIconProps) 
     }
   }, [draw]);
 
+  const handleMouseEnter = () => {
+    setShowTooltip(true);
+    if (onHover) {
+      onHover();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setShowTooltip(false);
+    if (onHoverLeave) {
+      onHoverLeave();
+    }
+  };
+
   return (
     <div 
       className={`icon-wrapper ${className}`}
-      onMouseEnter={() => setShowTooltip(true)}
-      onMouseLeave={() => setShowTooltip(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <svg
         ref={svgRef}
@@ -45,6 +82,39 @@ function RoughIcon({ className, width, height, draw, tooltip }: RoughIconProps) 
 }
 
 export default function DecorativeIcons() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
+  const [showIconHint, setShowIconHint] = useState(true);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+
+  const handleCoffeeHover = () => {
+    // Esconder o balão quando passa o mouse no café
+    setShowIconHint(false);
+  };
+
+  const handleCoffeeLeave = () => {
+    // Mostrar o balão novamente quando tira o mouse do café
+    setShowIconHint(true);
+  };
+
   const roughOptions = {
     stroke: '#2d2d2d',
     strokeWidth: 1.5,
@@ -61,7 +131,15 @@ export default function DecorativeIcons() {
 
   return (
     <>
-      {/* Livro */}
+      {/* Balão de dica dos ícones */}
+      {isVisible && showIconHint && (
+        <div className="icon-hint-bubble">
+          <IconHintBubble />
+          <span className="icon-hint-text">Passe o cursor nos ícones e descubra meus segredos obscuros</span>
+        </div>
+      )}
+
+      <div ref={containerRef}>
       <RoughIcon
         className="icon book"
         width={70}
@@ -165,6 +243,8 @@ export default function DecorativeIcons() {
         width={70}
         height={65}
         tooltip="Sou de TI mas tenho intolerância a café. Sim, nós existimos"
+        onHover={handleCoffeeHover}
+        onHoverLeave={handleCoffeeLeave}
         draw={(rc, svg) => {
           // Xícara
           svg.appendChild(rc.path('M12,22 L12,52 Q12,60 28,60 Q44,60 44,52 L44,22 Z', { ...fillOptions, fill: 'rgba(180, 140, 100, 0.2)' }));
@@ -257,6 +337,7 @@ export default function DecorativeIcons() {
           svg.appendChild(rc.line(65, 48, 73, 48, roughOptions));
         }}
       />
+      </div>
     </>
   );
 }
