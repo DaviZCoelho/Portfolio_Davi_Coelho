@@ -85,17 +85,17 @@ function DrawingHintBubble() {
     // Balão orgânico
     svgRef.current.appendChild(
       rc.path(
-        'M8,5 Q2,5 2,18 Q2,31 8,31 L170,31 Q178,31 178,18 Q178,5 170,5 Z',
+        'M13,8 Q6,8 6,24 Q6,38 13,38 L220,38 Q230,38 230,24 Q230,8 220,8 Z',
         { ...o, fill: 'rgba(254,249,231,0.9)', fillStyle: 'solid' as const }
       )
     );
     // Pontinha apontando para baixo-direita
     svgRef.current.appendChild(
-      rc.path('M148,31 L164,42 L135,31', { ...o, fill: 'rgba(254,249,231,0.9)', fillStyle: 'solid' as const })
+      rc.path('M188,38 L206,55 L171,38', { ...o, fill: 'rgba(254,249,231,0.9)', fillStyle: 'solid' as const })
     );
   }, []);
 
-  return <svg ref={svgRef} className="drawing-hint-svg" width={180} height={46} viewBox="0 0 180 46" />;
+  return <svg ref={svgRef} className="drawing-hint-svg" width={238} height={60} viewBox="0 0 238 60" />;
 }
 
 /* ── Main Drawing Canvas ── */

@@ -1571,8 +1571,8 @@ body {
 /* Balão de dica "clique aqui para desenhar" */
 .drawing-hint-bubble {
   position: fixed;
-  bottom: 72px;
-  right: 12px;
+  bottom: 77px;
+  right: 25px;
   z-index: 415;
   pointer-events: none;
   animation: hint-float 3s ease-in-out infinite, hint-fade-in 0.5s ease;
@@ -1589,10 +1589,10 @@ body {
   z-index: 1;
   display: block;
   font-family: var(--font-caveat), cursive;
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: #888;
   white-space: nowrap;
-  padding: 8px 16px 14px;
+  padding: 9px 24px 20px;
   letter-spacing: 0.3px;
 }
 
