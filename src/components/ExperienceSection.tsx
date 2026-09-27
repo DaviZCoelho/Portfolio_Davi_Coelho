@@ -123,7 +123,7 @@ function SketchUnderline() {
   );
 }
 
-const techStack = ['EC2', 'Lambda', 'VPC', 'CloudWatch', 'IAM'];
+const techStack = ['AWS', 'Next.js', 'TypeScript', 'Python', 'Git'];
 
 export default function ExperienceSection() {
   return (
@@ -148,14 +148,14 @@ export default function ExperienceSection() {
         <div className="exp-header">
           <span className="exp-role">Estagiário em Cloud &amp; Infra</span>
           <span className="exp-company">:upd8</span>
-          <span className="exp-period">Atual</span>
+          <span className="exp-period">mar. 2026 — set. 2026</span>
         </div>
 
         {/* Description */}
         <p className="exp-description">
-          Atualmente mergulhado em um treinamento intensivo para dominar infraestrutura em nuvem na{' '}
-          <span className="exp-highlight">:upd8</span>. No dia a dia, lido com o ecossistema{' '}
-          <span className="exp-highlight">AWS</span> (EC2, Lambda, VPC) e aprendo como manter ambientes robustos de pé.
+          Atuação em projetos de tecnologia envolvendo{' '}
+          <span className="exp-highlight">computação em nuvem</span>, desenvolvimento de software e{' '}
+          <span className="exp-highlight">inteligência artificial</span>. Participação no desenvolvimento e validação de soluções, provas de conceito, testes e documentação técnica.
         </p>
 
         {/* Tech stack as small post-it tags */}
