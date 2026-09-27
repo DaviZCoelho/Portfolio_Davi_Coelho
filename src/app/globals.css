@@ -44,6 +44,7 @@ body {
   color: #171717;
   font-family: var(--font-indie), cursive;
   min-height: 100vh;
+  min-height: 100svh;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   forced-color-adjust: none;
@@ -52,13 +53,15 @@ body {
 /* ===== HEADER ===== */
 .header {
   position: fixed;
-  top: 26px;
+  top: clamp(10px, 2.2vh, 26px);
   left: 50%;
   transform: translateX(-50%) rotate(-3deg);
   z-index: 420;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: max-content;
+  max-width: 96vw;
 }
 
 /* Fita adesiva laranja no topo - com bordas rasgadas */
@@ -206,15 +209,17 @@ body {
 /* ===== MAIN CONTENT ===== */
 .main-content {
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 2rem clamp(1rem, 5%, 3rem);
-  padding-top: 80px;
+  padding: 2rem clamp(1rem, 5vw, 3rem);
+  padding-top: clamp(76px, 9vh, 110px);
   position: relative;
-  overflow-x: hidden;
-  max-width: 100vw;
+  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
 }
 
 .home-section {
@@ -223,9 +228,10 @@ body {
   justify-content: center;
   gap: clamp(1.5rem, 4vw, 4rem);
   flex-wrap: wrap;
-  max-width: 1200px;
   width: 100%;
+  max-width: min(1500px, 92vw);
   min-height: calc(100vh - 120px);
+  min-height: calc(100svh - 120px);
   position: relative;
   overflow: visible;
   scroll-margin-top: 90px;
@@ -282,7 +288,9 @@ body {
 .head {
   position: relative;
   z-index: 2;
-  margin-bottom: -24px;
+  /* A sobreposição cabeça↔corpo é controlada só por .stick-body,
+     de forma proporcional ao tamanho da foto (evita gap "flutuante"). */
+  margin-bottom: 0;
 }
 
 .head-photo {
@@ -292,7 +300,11 @@ body {
 }
 
 .stick-body {
-  margin-top: clamp(-120px, -9vw, -60px);
+  /* Puxa o topo do corpo até logo abaixo do queixo. O recuo escala com
+     vw na mesma proporção da foto (width: 28vw), então a distância
+     cabeça↔corpo permanece visualmente constante em qualquer largura.
+     Os limites do clamp acompanham a faixa de tamanho da foto. */
+  margin-top: clamp(-168px, -11.2vw, -72px);
   position: relative;
   z-index: 1;
   overflow: visible;
@@ -497,69 +509,77 @@ body {
   right: 30px;
 }
 
-/* Ícones: tamanho proporcional ao viewport */
-.icon-wrapper svg {
-  width: clamp(35px, 5vw, 100%);
-  height: auto;
+/* Ícones: tamanho proporcional ao viewport, escala fluida via variável */
+.icon-wrapper {
+  --icon-scale: clamp(0.5, 0.42 + 0.9vw, 1);
 }
 
-/* Posições dos ícones — coordenadas % com margem de segurança */
+.icon-wrapper svg {
+  width: auto;
+  height: auto;
+  transform: scale(var(--icon-scale));
+  transform-origin: center;
+}
+
+/* Posições dos ícones — coordenadas % com margem de segurança.
+   Mantidas dentro da .home-section para nunca vazarem do viewport. */
 
 .icon-wrapper.icon.book {
-  top: 11%;
-  left: -2%;
+  top: 10%;
+  left: 1%;
 }
 
 .icon-wrapper.icon.cloud {
-  top: 7%;
-  left: 55%;
+  top: 5%;
+  left: 52%;
 }
 
 .icon-wrapper.icon.chess {
-  top: 12%;
-  right: -2%;
+  top: 11%;
+  right: 1%;
   left: auto;
 }
 
 .icon-wrapper.icon.bug {
-  top: 38%;
-  right: -1%;
+  top: 37%;
+  right: 0%;
   left: auto;
 }
 
 .icon-wrapper.icon.coffee {
   bottom: 40%;
-  left: -6%;
+  left: 0%;
 }
 
 .icon-wrapper.icon.floppy {
   bottom: 10%;
-  right: 25%;
+  right: 24%;
   left: auto;
 }
 
 .icon-wrapper.icon.computer {
-  bottom: 17%;
-  right: -3%;
+  bottom: 16%;
+  right: 0%;
   left: auto;
 }
 
 .icon-wrapper.icon.cassette {
-  bottom: 10%;
-  left: -2%;
+  bottom: 9%;
+  left: 1%;
 }
 
 /* ===== EXPERIENCE SECTION ===== */
 .experience-section {
   width: 100%;
-  max-width: 900px;
-  padding: 5rem 2rem 8rem;
+  max-width: min(960px, 92vw);
+  padding: clamp(3rem, 6vh, 5rem) clamp(1rem, 4vw, 2rem) clamp(4rem, 9vh, 8rem);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   scroll-margin-top: 90px;
   min-height: 80vh;
+  min-height: 80svh;
 }
 
 /* Title */
@@ -588,7 +608,7 @@ body {
   position: relative;
   background: #fef9e7;
   padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.5rem) clamp(1.2rem, 2.5vw, 2rem);
-  max-width: 720px;
+  max-width: min(760px, 100%);
   width: 100%;
   border: none;
   box-shadow:
@@ -784,27 +804,27 @@ body {
 
 .exp-doodle-cloud {
   top: -30px;
-  right: -50px;
+  right: clamp(-50px, -3vw, -8px);
   transform: rotate(8deg);
 }
 
 .exp-doodle-server {
   bottom: -20px;
-  left: -45px;
+  left: clamp(-45px, -3vw, -8px);
   transform: rotate(-5deg);
 }
 
 .exp-doodle-lightning {
   top: 30px;
-  right: -35px;
+  right: clamp(-35px, -2.5vw, -6px);
   transform: rotate(12deg);
 }
 
 /* ===== ABOUT SECTION ===== */
 .about-section {
   width: 100%;
-  max-width: 1100px;
-  padding: 4rem 2rem 6rem;
+  max-width: min(1180px, 94vw);
+  padding: clamp(2.5rem, 5vh, 4rem) clamp(1rem, 4vw, 2rem) clamp(4rem, 7vh, 6rem);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -837,7 +857,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: clamp(1rem, 3vw, 3rem);
   width: 100%;
 }
 
@@ -846,9 +866,15 @@ body {
 .about-doodles-right {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
   align-items: center;
   flex-shrink: 0;
+}
+
+/* Doodles do about escalam suavemente com a tela */
+.about-doodle {
+  width: clamp(38px, 4vw, 70px);
+  height: auto;
 }
 
 .about-doodle {
@@ -1023,8 +1049,8 @@ body {
 /* ===== PROJECTS SECTION ===== */
 .projects-section {
   width: 100%;
-  max-width: 1100px;
-  padding: 4rem 2rem 6rem;
+  max-width: min(1280px, 94vw);
+  padding: clamp(2.5rem, 5vh, 4rem) clamp(1rem, 4vw, 2rem) clamp(4rem, 7vh, 6rem);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1054,8 +1080,8 @@ body {
 /* Grid */
 .proj-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
   width: 100%;
 }
 
@@ -1258,9 +1284,10 @@ body {
 /* ===== CONTACT SECTION ===== */
 .contact-section {
   width: 100%;
-  max-width: 900px;
+  max-width: min(960px, 92vw);
   min-height: 85vh;
-  padding: 1.2rem 2rem 4rem;
+  min-height: 85svh;
+  padding: clamp(1.2rem, 3vh, 2rem) clamp(1rem, 4vw, 2rem) clamp(3rem, 6vh, 4rem);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1431,14 +1458,14 @@ body {
 }
 
 .contact-deco-clip {
-  top: -20px;
-  left: -25px;
+  top: clamp(-20px, -1.5vw, -10px);
+  left: clamp(-25px, -2vw, -8px);
   transform: rotate(15deg);
 }
 
 .contact-deco-coffee {
-  bottom: -15px;
-  right: -40px;
+  bottom: clamp(-15px, -1.5vw, -8px);
+  right: clamp(-40px, -3vw, -10px);
   transform: rotate(-8deg);
 }
 
@@ -1571,8 +1598,8 @@ body {
 /* Balão de dica "clique aqui para desenhar" */
 .drawing-hint-bubble {
   position: fixed;
-  bottom: 77px;
-  right: 25px;
+  bottom: clamp(66px, 8vh, 77px);
+  right: clamp(8px, 2vw, 25px);
   z-index: 415;
   pointer-events: none;
   animation: hint-float 3s ease-in-out infinite, hint-fade-in 0.5s ease;
@@ -1599,8 +1626,9 @@ body {
 /* Balão de dica dos ícones "Descubra meus segredos obscuros" */
 .icon-hint-bubble {
   position: fixed;
-  top: 415px;
-  left: 55px;
+  top: clamp(340px, 45vh, 460px);
+  left: clamp(12px, 4vw, 55px);
+  max-width: min(340px, 80vw);
   z-index: 410;
   pointer-events: none;
   animation: hint-float 3s ease-in-out infinite, hint-fade-in 0.5s ease;
@@ -1638,270 +1666,118 @@ body {
 
 /* ===== RESPONSIVE ===== */
 
-/* ---------- DESKTOP MÉDIO (≤1280px) — menu e ícones começam a encolher ---------- */
-@media (max-width: 1280px) {
-  .header {
-    transform: translateX(-50%) rotate(-3deg) scale(0.88);
-  }
+/* ===================================================================
+   RESPONSIVO — abordagem fluida.
+   A escala dos ícones/tipografia é feita por clamp()/vw no fluxo normal.
+   Os media queries abaixo só entram onde a ESTRUTURA muda de verdade:
+   - reagrupar os ícones decorativos da home (nunca escondê-los);
+   - a home vira coluna;
+   - o menu passa a poder quebrar em telas estreitas.
+   =================================================================== */
 
-  .icon-wrapper {
-    transform: scale(0.8);
-  }
-}
-
-/* ---------- NOTEBOOKS GRANDES (≤1100px) — esconder ícones das pontas ---------- */
+/* ---------- NOTEBOOKS / TELAS MÉDIAS (≤1100px) ----------
+   A .home-section fica mais estreita; recolhemos os ícones das pontas
+   um pouco para dentro para que continuem visíveis, sem sumir. */
 @media (max-width: 1100px) {
-  .header {
-    transform: translateX(-50%) rotate(-3deg) scale(0.75);
-  }
-
-  .icon-wrapper {
-    transform: scale(0.65);
-  }
-
-  .icon-wrapper.icon.coffee,
-  .icon-wrapper.icon.bug {
-    display: none;
-  }
-
-  .drawing-toolbar {
-    bottom: 16px;
-    right: 16px;
-  }
-
-  .drawing-hint-bubble {
-    bottom: 66px;
-    right: 6px;
-  }
+  .icon-wrapper.icon.book   { left: 0%; }
+  .icon-wrapper.icon.chess  { right: 0%; }
+  .icon-wrapper.icon.bug    { right: 0%; top: 40%; }
+  .icon-wrapper.icon.coffee { left: 0%; bottom: 42%; }
+  .icon-wrapper.icon.computer { right: 0%; }
+  .icon-wrapper.icon.cassette { left: 0%; }
 }
 
-/* ---------- NOTEBOOK (≤1024px) ---------- */
-@media (max-width: 1024px) {
-  .icon-wrapper {
-    transform: scale(0.55);
-  }
-
-  .icon-wrapper.icon.coffee,
-  .icon-wrapper.icon.computer,
-  .icon-wrapper.icon.cassette,
-  .icon-wrapper.icon.bug {
-    display: none;
-  }
-
-  .about-card {
-    max-width: 600px;
-  }
-
-  .exp-card {
-    max-width: 640px;
-  }
-}
-
-/* ---------- TABLET (≤768px) ---------- */
-@media (max-width: 768px) {
-  .header {
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%) rotate(-2deg) scale(0.78);
-    transform-origin: top center;
-    width: min(98vw, 600px);
-  }
-
-  .header::before {
-    top: -8px;
-    width: 58px;
-    height: 16px;
-  }
-
-  .nav-bar {
-    width: 100%;
-    padding: 0.5rem 0.7rem 0.65rem;
-  }
-
-  .nav-bar ul {
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    gap: 0.2rem;
-  }
-
-  .nav-bar li {
-    min-width: 0;
-  }
-
-  .nav-bar a {
-    font-size: clamp(0.58rem, 2.15vw, 0.78rem);
-    padding: 0.08rem 0.2rem;
-    white-space: nowrap;
-  }
-
-  .separator {
-    margin: 0 0.05rem;
-    font-size: 0.58rem;
-  }
-
-  .main-content {
-    padding-top: 92px;
-  }
-
-  /* Home */
+/* ---------- TABLET (≤900px) ----------
+   A home passa a empilhar. Os ícones deixam de orbitar o conteúdo em
+   posições absolutas (que apertariam o texto) e viram uma "moldura"
+   fluida no rodapé da seção — mantendo a identidade de rabiscos. */
+@media (max-width: 900px) {
   .home-section {
     flex-direction: column;
     text-align: center;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100svh - 90px);
+    padding-bottom: clamp(4rem, 12vh, 7rem);
   }
 
-  .hero-text {
-    text-align: center;
-  }
+  .hero-text { text-align: center; }
+  .greeting { justify-content: center; }
 
-  .greeting {
+  /* Ícones reorganizados como faixa decorativa fluida (flex) no fim da home */
+  .home-section > div:first-child {
+    order: 3;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
+    gap: clamp(0.6rem, 3vw, 1.4rem);
+    width: 100%;
+    margin-top: clamp(1.5rem, 4vh, 2.5rem);
   }
 
-  /* Esconder TODOS os ícones no tablet */
   .icon-wrapper {
-    display: none !important;
+    position: static;
+    opacity: 0.72;
+    --icon-scale: clamp(0.5, 0.4 + 1vw, 0.85);
   }
 
-  .icon-tooltip {
-    display: none !important;
-  }
+  /* Nesta faixa não faz sentido posicionar tooltips por cima do conteúdo */
+  .icon-tooltip { display: none; }
+
+  /* O balão de dica flutuante colidiria com a faixa; escondemos aqui */
+  .icon-hint-bubble { display: none; }
 
   /* Experience */
-  .experience-section {
-    padding: 3rem 1rem 4rem;
-  }
+  .exp-card { transform: rotate(0deg); }
+  .exp-card::before { left: 20px; }
+  .exp-header,
+  .exp-description,
+  .exp-tech-stack { padding-left: 0; }
+  .exp-doodle { display: none; }
 
-  .exp-card {
-    transform: rotate(0deg);
-  }
-
-  .exp-card::before {
-    left: 20px;
-  }
-
-  .exp-header {
-    padding-left: 0;
-  }
-
-  .exp-description {
-    padding-left: 0;
-  }
-
-  .exp-tech-stack {
-    padding-left: 0;
-  }
-
-  .exp-doodle {
-    display: none;
-  }
-
-  /* About */
-  .about-section {
-    padding: 3rem 1rem 4rem;
-  }
-
-  .about-layout {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
+  /* About — empilha coluna, doodles viram linha acima/abaixo do cartão */
+  .about-layout { flex-direction: column; gap: clamp(1.2rem, 4vw, 1.8rem); }
   .about-doodles-left,
-  .about-doodles-right {
-    flex-direction: row;
-    gap: 2rem;
-  }
-
-  .about-card {
-    transform: rotate(0deg);
-    max-width: 100%;
-  }
-
-  .about-text {
-    padding-left: 0;
-    line-height: 1.85;
-  }
-
-  .about-card::before {
-    display: none;
-  }
-
-  /* Projects */
-  .projects-section {
-    padding: 3rem 1rem 4rem;
-  }
-
-  .proj-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .proj-card {
-    transform: rotate(0deg) !important;
-  }
-
-  .proj-doodle-wrapper {
-    opacity: 0.4;
-  }
+  .about-doodles-right { flex-direction: row; gap: clamp(1.5rem, 6vw, 2.5rem); }
+  .about-card { transform: rotate(0deg); max-width: 100%; }
+  .about-text { padding-left: 0; line-height: 1.85; }
+  .about-card::before { display: none; }
 
   /* Contact */
-  .contact-section {
-    padding: 3rem 1rem 2rem;
-    min-height: auto;
+  .contact-note { transform: rotate(0deg); clip-path: none; }
+  .contact-deco { display: none; }
+}
+
+/* ---------- TABLET ESTREITO / CELULAR GRANDE (≤680px) ----------
+   O menu passa a poder quebrar em duas linhas com os separadores
+   escondidos, mantendo legibilidade em vez de espremer numa linha só. */
+@media (max-width: 680px) {
+  .header {
+    top: clamp(8px, 1.6vh, 14px);
+    width: min(96vw, 560px);
   }
 
-  .contact-note {
-    transform: rotate(0deg);
-    clip-path: none;
+  .header::before { top: -8px; width: 58px; height: 16px; }
+
+  .nav-bar {
+    width: 100%;
+    padding: clamp(0.4rem, 1.6vw, 0.6rem) clamp(0.5rem, 2vw, 0.9rem);
   }
 
-  .contact-deco {
-    display: none;
+  .nav-bar ul {
+    flex-wrap: wrap;
+    gap: 0.15rem 0.35rem;
   }
 
-  .contact-link-doodle svg {
-    width: 40px;
-    height: 40px;
-  }
+  .nav-bar a { white-space: nowrap; }
 
-  /* Drawing toolbar */
-  .drawing-toolbar {
-    bottom: 16px;
-    right: 16px;
-  }
+  .separator { display: none; }
 
-  .drawing-toolbar-toggle {
-    width: 44px;
-    height: 44px;
-  }
-
-  .drawing-hint-bubble {
-    bottom: 62px;
-    right: 8px;
-  }
+  .contact-link-doodle svg { width: clamp(34px, 9vw, 44px); height: auto; }
 }
 
 /* ---------- CELULAR (≤480px) ---------- */
 @media (max-width: 480px) {
-  .header {
-    top: 8px;
-    transform: translateX(-50%) rotate(-1.8deg) scale(0.68);
-    width: min(99vw, 520px);
-  }
-
-  .nav-bar {
-    padding: 0.4rem 0.55rem 0.52rem;
-  }
-
-  .nav-bar a {
-    font-size: clamp(0.5rem, 2.7vw, 0.64rem);
-    padding: 0.05rem 0.12rem;
-  }
-
-  .separator {
-    display: none;
-  }
-
+  /* Fundo sem a margem vermelha (que ficaria colada na borda) */
   body {
     background-image:
       repeating-linear-gradient(
@@ -1914,121 +1790,52 @@ body {
     background-size: 100% 30px;
   }
 
-  .main-content {
-    padding: 1rem;
-    padding-top: 84px;
-  }
+  .main-content { padding: 1rem; padding-top: clamp(76px, 16vw, 96px); }
 
-  .home-section {
-    min-height: calc(100vh - 60px);
-  }
+  .home-section { min-height: calc(100svh - 70px); }
 
-  .section-divider {
-    max-width: 200px;
-    height: 30px;
-  }
+  .section-divider { max-width: 200px; height: 30px; }
+
+  .icon-wrapper { --icon-scale: clamp(0.46, 0.38 + 2vw, 0.7); }
 
   /* Experience */
-  .experience-section {
-    padding: 2rem 0.8rem 3rem;
-    min-height: auto;
-  }
-
-  .exp-card::before {
-    display: none;
-  }
-
-  .exp-company::before {
-    display: none;
-  }
-
-  .exp-description {
-    line-height: 1.75;
-  }
-
-  .exp-tech-tag {
-    font-size: 0.85rem;
-    padding: 0.2rem 0.5rem;
-  }
+  .exp-card::before { display: none; }
+  .exp-company::before { display: none; }
+  .exp-description { line-height: 1.75; }
 
   /* About */
-  .about-section {
-    padding: 2rem 0.8rem 3rem;
-  }
-
   .about-doodles-left,
-  .about-doodles-right {
-    gap: 1rem;
-    transform: scale(0.8);
-  }
-
-  .about-text {
-    line-height: 1.75;
-  }
-
-  .about-red-underlined {
-    white-space: normal;
-  }
+  .about-doodles-right { gap: clamp(0.8rem, 4vw, 1.4rem); }
+  .about-doodle { width: clamp(34px, 11vw, 52px); }
+  .about-text { line-height: 1.75; }
+  .about-red-underlined { white-space: normal; }
 
   /* Projects */
-  .projects-section {
-    padding: 2rem 0.8rem 3rem;
-  }
-
-  .proj-card-title {
-    padding-right: 45px;
-  }
-
-  .proj-card-desc {
-    line-height: 1.7;
-  }
-
-  .proj-doodle-wrapper {
-    transform: scale(0.7);
-    top: 4px;
-    right: 4px;
-  }
-
-  .proj-btn {
-    font-size: 0.9rem;
-    padding: 0.35rem 0.8rem;
-  }
+  .proj-card-title { padding-right: 45px; }
+  .proj-card-desc { line-height: 1.7; }
+  .proj-doodle-wrapper { transform: scale(0.7); top: 4px; right: 4px; }
 
   /* Contact */
-  .contact-section {
-    padding: 2rem 0.8rem 2rem;
-  }
-
-  .contact-link-doodle svg {
-    width: 32px;
-    height: 32px;
-  }
-
-  .contact-links {
-    gap: 1.2rem;
-  }
+  .contact-link-doodle svg { width: clamp(30px, 9vw, 38px); }
+  .contact-links { gap: 1.2rem; }
 
   /* Footer */
-  .site-footer {
-    padding: 1.5rem 0.8rem 2rem;
-  }
-
-  .footer-text {
-    font-size: 0.8rem;
-  }
+  .footer-text { font-size: 0.8rem; }
 
   /* Drawing */
-  .drawing-toolbar {
-    bottom: 12px;
-    right: 12px;
-  }
+  .drawing-toolbar { bottom: 12px; right: 12px; }
+  .drawing-toolbar-toggle { width: 44px; height: 44px; }
+  .drawing-hint-bubble { display: none; }
+}
 
-  .drawing-toolbar-toggle {
-    width: 40px;
-    height: 40px;
-  }
-
-  .drawing-hint-bubble {
-    display: none;
-  }
+/* ---------- MONITORES GRANDES (≥1600px) ----------
+   Aproveitar melhor o espaço: tipografia e cartões um pouco maiores,
+   sem quebrar a estética. O clamp() já cobre boa parte; aqui só
+   destravamos os tetos onde faz sentido. */
+@media (min-width: 1600px) {
+  .home-section { gap: clamp(3rem, 5vw, 6rem); }
+  .icon-wrapper { --icon-scale: clamp(1, 0.6 + 0.55vw, 1.35); }
+  .head-photo { width: clamp(360px, 24vw, 500px); }
+  .greeting { font-size: clamp(3rem, 3.4vw, 4.2rem); }
+  .title { font-size: clamp(2.4rem, 2.6vw, 3.4rem); }
 }
